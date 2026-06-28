@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Misión Ecuación - MATEMATICAS</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="animated-bg"></div>
+  <div id="achievementToast" class="achievement-toast" aria-live="polite"></div>
+
+  <main class="app">
+    <section id="startScreen" class="screen active">
+      <div class="hero-card">
+        <span class="badge">MATEMATICAS - MARCO ANTONIO CHOQQUE HUAMANI  DEVELOPER CODE</span>
+        <h1>🧠 Misión Ecuación</h1>
+        <p class="intro">
+          Resuelve ecuaciones y problemas con ecuaciones, avanza por niveles, activa poderes, gana monedas,
+          cuida tus vidas y juega con música de fondo.
+        </p>
+
+        <div class="info-grid four">
+          <div>
+            <strong>⏱ Timer</strong>
+            <span>más tiempo para resolver</span>
+          </div>
+          <div>
+            <strong>❤️ Vidas</strong>
+            <span>3 o más según personaje</span>
+          </div>
+          <div>
+            <strong>⭐ Puntos</strong>
+            <span>bonos por rapidez y racha</span>
+          </div>
+          <div>
+            <strong>🎵 Sonido</strong>
+            <span>música y efectos activables</span>
+          </div>
+        </div>
+
+        <div class="button-row">
+          <button id="goCharactersBtn" class="btn primary">Elegir personaje</button>
+          <button id="howToPlayBtn" class="btn secondary">Cómo jugar</button>
+          <button id="soundToggleStart" class="btn ghost" type="button">🔊 Sonido ON</button>
+        </div>
+
+        <p class="record">🏆 Récord: <span id="bestScoreStart">0</span> puntos</p>
+      </div>
+    </section>
+
+    <section id="characterScreen" class="screen">
+      <div class="panel wide">
+        <div class="panel-header">
+          <div>
+            <span class="badge">Paso 1</span>
+            <h2>Elige tu personaje</h2>
+            <p>Cada personaje tiene una pequeña ventaja para la partida.</p>
+          </div>
+          <button class="btn ghost" data-back="startScreen">Volver</button>
+        </div>
+
+        <div id="characters" class="characters"></div>
+
+        <div class="settings-card">
+          <h3>Configura la partida</h3>
+          <div class="settings-grid three">
+            <label>
+              Preguntas
+              <select id="questionLimit">
+                <option value="12" selected>12 preguntas</option>
+                <option value="15">15 preguntas</option>
+                <option value="20">20 preguntas</option>
+                <option value="25">25 preguntas</option>
+              </select>
+            </label>
+            <label>
+              Tiempo por pregunta
+              <select id="secondsPerQuestion">
+                <option value="45">45 segundos</option>
+                <option value="60">60 segundos</option>
+                <option value="90" selected>90 segundos</option>
+                <option value="120">120 segundos</option>
+              </select>
+            </label>
+            <label>
+              Modo de juego
+              <select id="gameMode">
+                <option value="aventura" selected>Aventura</option>
+                <option value="desafio">Desafío</option>
+                <option value="practica">Práctica</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <button id="startGameBtn" class="btn primary full" disabled>Iniciar juego</button>
+      </div>
+    </section>
+
+    <section id="howToPlayScreen" class="screen">
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <span class="badge">Instrucciones</span>
+            <h2>Cómo jugar</h2>
+          </div>
+          <button class="btn ghost" data-back="startScreen">Volver</button>
+        </div>
+
+        <div class="rules">
+          <p>✅ Lee la ecuación o el problema matemático y encuentra el valor de <strong>x</strong>.</p>
+          <p>✅ Marca una de las cuatro alternativas.</p>
+          <p>✅ Tienes más tiempo por pregunta para resolver con tranquilidad.</p>
+          <p>✅ Cada error o tiempo agotado te quita una vida, salvo que actives el escudo.</p>
+          <p>✅ Usa <strong>50/50</strong> para eliminar dos alternativas incorrectas.</p>
+          <p>✅ Usa <strong>Saltar</strong> si una pregunta se complica.</p>
+          <p>✅ Activa <strong>x2 puntos</strong> cuando estés segura/o de tu respuesta.</p>
+          <p>✅ Presiona las teclas <strong>1, 2, 3 o 4</strong> para responder más rápido.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="gameScreen" class="screen">
+      <div class="game-shell">
+        <header class="topbar">
+          <div class="player-card">
+            <div id="playerAvatar" class="small-avatar">🧑‍🚀</div>
+            <div>
+              <strong id="playerName">Jugador</strong>
+              <span id="levelText">Nivel 1</span>
+            </div>
+          </div>
+
+          <div class="stats">
+            <div><span>Puntos</span><strong id="scoreText">0</strong></div>
+            <div><span>Vidas</span><strong id="livesText">❤️❤️❤️</strong></div>
+            <div><span>Racha</span><strong id="streakText">0</strong></div>
+            <div><span>Monedas</span><strong id="coinsText">0</strong></div>
+          </div>
+
+          <div class="top-actions">
+            <button id="soundToggleGame" class="btn ghost small" type="button">🔊</button>
+            <button id="pauseBtn" class="btn ghost small">Pausa</button>
+          </div>
+        </header>
+
+        <div id="levelMap" class="level-map"></div>
+
+        <div class="progress-wrap">
+          <div class="progress-info">
+            <span id="questionCounter">Pregunta 1/12</span>
+            <span id="timerText">30s</span>
+          </div>
+          <div class="progress-bar">
+            <div id="timerBar" class="timer-bar"></div>
+          </div>
+        </div>
+
+        <article class="question-card">
+          <div class="mission-row">
+            <span id="levelBadge" class="level-badge">Nivel 1</span>
+            <span id="missionType" class="mission-type">Ecuaciones y problemas</span>
+          </div>
+          <p class="question-label">Resuelve la ecuación:</p>
+          <h2 id="equationText">2x + 4 = 12</h2>
+          <p id="comboText" class="combo"></p>
+          <p id="feedbackText" class="feedback"></p>
+
+          <div id="answers" class="answers"></div>
+
+          <div class="tools">
+            <button id="hintBtn" class="btn secondary small">50/50</button>
+            <button id="skipBtn" class="btn secondary small">Saltar</button>
+            <button id="shieldBtn" class="btn secondary small">Escudo</button>
+            <button id="doubleBtn" class="btn secondary small">x2 puntos</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="pauseScreen" class="screen overlay-screen">
+      <div class="modal-card">
+        <h2>⏸ Juego en pausa</h2>
+        <p>Respira, piensa y vuelve cuando estés lista/o.</p>
+        <div class="button-row center">
+          <button id="resumeBtn" class="btn primary">Continuar</button>
+          <button id="pauseSoundBtn" class="btn secondary">🔊 Sonido ON</button>
+          <button id="quitBtn" class="btn danger">Salir</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="endScreen" class="screen">
+      <div class="panel result-panel">
+        <span class="badge">Resultado final</span>
+        <h2 id="endTitle">¡Misión completada!</h2>
+        <div id="endAvatar" class="big-avatar">🏆</div>
+        <p id="endMessage"></p>
+
+        <div class="result-grid four">
+          <div><span>Puntaje</span><strong id="finalScore">0</strong></div>
+          <div><span>Correctas</span><strong id="correctCount">0</strong></div>
+          <div><span>Monedas</span><strong id="finalCoins">0</strong></div>
+          <div><span>Récord</span><strong id="bestScoreEnd">0</strong></div>
+        </div>
+
+        <div class="achievements-box">
+          <h3>Logros desbloqueados</h3>
+          <div id="achievementList" class="achievement-list"></div>
+        </div>
+
+        <div class="button-row center">
+          <button id="playAgainBtn" class="btn primary">Jugar otra vez</button>
+          <button id="homeBtn" class="btn secondary">Inicio</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
