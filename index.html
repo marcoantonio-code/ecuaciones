@@ -1,223 +1,317 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Misión Ecuación - MATEMATICAS</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Revista Ciberseguridad</title>
+<meta name="description" content="Revista digital: Ciberseguridad y protección de datos personales — Marco Antonio Choqque Huamani, NRC 37765.">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="animated-bg"></div>
-  <div id="achievementToast" class="achievement-toast" aria-live="polite"></div>
 
-  <main class="app">
-    <section id="startScreen" class="screen active">
-      <div class="hero-card">
-        <span class="badge">MATEMATICAS - MARCO ANTONIO CHOQQUE HUAMANI  DEVELOPER CODE</span>
-        <h1>🧠 Misión Ecuación</h1>
-        <p class="intro">
-          Resuelve ecuaciones y problemas con ecuaciones, avanza por niveles, activa poderes, gana monedas,
-          cuida tus vidas y juega con música de fondo.
-        </p>
+<header class="topbar">
+  <div class="brand"><span class="brand-mark">◆</span> Datos en Guardia <span class="brand-sub">· Revista digital Nº 01</span></div>
+  <div class="hint">Arrastra una esquina, haz clic en los bordes o usa ← →</div>
+</header>
 
-        <div class="info-grid four">
-          <div>
-            <strong>⏱ Timer</strong>
-            <span>más tiempo para resolver</span>
+<main class="stage">
+  <div class="book-wrap">
+    <div id="book" class="book">
+
+      <!-- ============ 1. PORTADA ============ -->
+      <div class="page page-cover" data-density="hard">
+        <div class="pi cover">
+          <img class="cover-img" src="img/portada.jpg" alt="">
+          <div class="cover-shade"></div>
+          <div class="cover-top">
+            <img class="uc-logo" src="img/logo-uc-blanco.png" alt="Universidad Continental">
+            <span class="ods-chip">ODS 16</span>
           </div>
-          <div>
-            <strong>❤️ Vidas</strong>
-            <span>3 o más según personaje</span>
+          <p class="cover-issue">Nº 01 · Octubre 2026</p>
+          <div class="masthead">DATOS <span>EN GUARDIA</span></div>
+          <div class="cover-main">
+            <p class="kicker">Edición especial</p>
+            <h1 class="cover-title">Ciberseguridad<em>y protección de datos personales</em></h1>
           </div>
-          <div>
-            <strong>⭐ Puntos</strong>
-            <span>bonos por rapidez y racha</span>
+          <ul class="cover-lines">
+            <li><b>Phishing, ransomware y filtraciones:</b> las amenazas que ponen en riesgo tu información</li>
+            <li><b>El factor humano:</b> la clave para prevenir ataques</li>
+            <li><b>Video:</b> la presentación oral, dentro de la revista</li>
+          </ul>
+          <div class="cover-foot">
+            <div><span class="small">Redacción</span><strong>Marco Antonio Choqque Huamani</strong></div>
+            <div class="right"><span class="small">NRC</span><strong>37765</strong></div>
           </div>
-          <div>
-            <strong>🎵 Sonido</strong>
-            <span>música y efectos activables</span>
-          </div>
-        </div>
-
-        <div class="button-row">
-          <button id="goCharactersBtn" class="btn primary">Elegir personaje</button>
-          <button id="howToPlayBtn" class="btn secondary">Cómo jugar</button>
-          <button id="soundToggleStart" class="btn ghost" type="button">🔊 Sonido ON</button>
-        </div>
-
-        <p class="record">🏆 Récord: <span id="bestScoreStart">0</span> puntos</p>
-      </div>
-    </section>
-
-    <section id="characterScreen" class="screen">
-      <div class="panel wide">
-        <div class="panel-header">
-          <div>
-            <span class="badge">Paso 1</span>
-            <h2>Elige tu personaje</h2>
-            <p>Cada personaje tiene una pequeña ventaja para la partida.</p>
-          </div>
-          <button class="btn ghost" data-back="startScreen">Volver</button>
-        </div>
-
-        <div id="characters" class="characters"></div>
-
-        <div class="settings-card">
-          <h3>Configura la partida</h3>
-          <div class="settings-grid three">
-            <label>
-              Preguntas
-              <select id="questionLimit">
-                <option value="12" selected>12 preguntas</option>
-                <option value="15">15 preguntas</option>
-                <option value="20">20 preguntas</option>
-                <option value="25">25 preguntas</option>
-              </select>
-            </label>
-            <label>
-              Tiempo por pregunta
-              <select id="secondsPerQuestion">
-                <option value="45">45 segundos</option>
-                <option value="60">60 segundos</option>
-                <option value="90" selected>90 segundos</option>
-                <option value="120">120 segundos</option>
-              </select>
-            </label>
-            <label>
-              Modo de juego
-              <select id="gameMode">
-                <option value="aventura" selected>Aventura</option>
-                <option value="desafio">Desafío</option>
-                <option value="practica">Práctica</option>
-              </select>
-            </label>
-          </div>
-        </div>
-
-        <button id="startGameBtn" class="btn primary full" disabled>Iniciar juego</button>
-      </div>
-    </section>
-
-    <section id="howToPlayScreen" class="screen">
-      <div class="panel">
-        <div class="panel-header">
-          <div>
-            <span class="badge">Instrucciones</span>
-            <h2>Cómo jugar</h2>
-          </div>
-          <button class="btn ghost" data-back="startScreen">Volver</button>
-        </div>
-
-        <div class="rules">
-          <p>✅ Lee la ecuación o el problema matemático y encuentra el valor de <strong>x</strong>.</p>
-          <p>✅ Marca una de las cuatro alternativas.</p>
-          <p>✅ Tienes más tiempo por pregunta para resolver con tranquilidad.</p>
-          <p>✅ Cada error o tiempo agotado te quita una vida, salvo que actives el escudo.</p>
-          <p>✅ Usa <strong>50/50</strong> para eliminar dos alternativas incorrectas.</p>
-          <p>✅ Usa <strong>Saltar</strong> si una pregunta se complica.</p>
-          <p>✅ Activa <strong>x2 puntos</strong> cuando estés segura/o de tu respuesta.</p>
-          <p>✅ Presiona las teclas <strong>1, 2, 3 o 4</strong> para responder más rápido.</p>
         </div>
       </div>
-    </section>
 
-    <section id="gameScreen" class="screen">
-      <div class="game-shell">
-        <header class="topbar">
-          <div class="player-card">
-            <div id="playerAvatar" class="small-avatar">🧑‍🚀</div>
-            <div>
-              <strong id="playerName">Jugador</strong>
-              <span id="levelText">Nivel 1</span>
-            </div>
+      <!-- ============ 2. ÍNDICE ============ -->
+      <div class="page">
+        <div class="pi paper">
+          <div class="running"><span>Datos en Guardia</span><span>Contenido</span></div>
+          <h2 class="section-title">En este <span class="hl">número</span></h2>
+          <ol class="toc">
+            <li data-goto="2"><img src="img/intro-laptop.jpg" alt=""><span class="toc-t">La transformación digital y sus riesgos<small>Introducción</small></span><span class="toc-n">03</span></li>
+            <li data-goto="3"><img src="img/proteccion-datos.jpg" alt=""><span class="toc-t">Por qué importa proteger los datos<small>Importancia</small></span><span class="toc-n">04</span></li>
+            <li data-goto="4"><img src="img/filtracion.jpg" alt=""><span class="toc-t">Las amenazas digitales<small>Phishing, ransomware, filtraciones</small></span><span class="toc-n">05</span></li>
+            <li data-goto="5"><img src="img/factor-humano.jpg" alt=""><span class="toc-t">El factor humano<small>Vulnerabilidad</small></span><span class="toc-n">06</span></li>
+            <li data-goto="6"><img src="img/estrategias.jpg" alt=""><span class="toc-t">Estrategias de protección<small>Prevención y respuesta</small></span><span class="toc-n">07</span></li>
+            <li data-goto="7"><img src="img/cierre.jpg" alt=""><span class="toc-t">Hacia un entorno digital confiable<small>Conclusión</small></span><span class="toc-n">08</span></li>
+            <li data-goto="8"><img src="img/red-personas.jpg" alt=""><span class="toc-t">Referencias<small>APA 7.ª edición</small></span><span class="toc-n">09</span></li>
+            <li data-goto="9" class="toc-video"><span class="toc-play"></span><span class="toc-t">Presentación oral<small>Video</small></span><span class="toc-n">10</span></li>
+          </ol>
+          <div class="ods-box">
+            <div class="ods-num">16</div>
+            <p><b>ODS 16 · Paz, justicia e instituciones sólidas.</b> Proteger los datos personales también es proteger derechos y confianza.</p>
           </div>
-
-          <div class="stats">
-            <div><span>Puntos</span><strong id="scoreText">0</strong></div>
-            <div><span>Vidas</span><strong id="livesText">❤️❤️❤️</strong></div>
-            <div><span>Racha</span><strong id="streakText">0</strong></div>
-            <div><span>Monedas</span><strong id="coinsText">0</strong></div>
-          </div>
-
-          <div class="top-actions">
-            <button id="soundToggleGame" class="btn ghost small" type="button">🔊</button>
-            <button id="pauseBtn" class="btn ghost small">Pausa</button>
-          </div>
-        </header>
-
-        <div id="levelMap" class="level-map"></div>
-
-        <div class="progress-wrap">
-          <div class="progress-info">
-            <span id="questionCounter">Pregunta 1/12</span>
-            <span id="timerText">30s</span>
-          </div>
-          <div class="progress-bar">
-            <div id="timerBar" class="timer-bar"></div>
-          </div>
-        </div>
-
-        <article class="question-card">
-          <div class="mission-row">
-            <span id="levelBadge" class="level-badge">Nivel 1</span>
-            <span id="missionType" class="mission-type">Ecuaciones y problemas</span>
-          </div>
-          <p class="question-label">Resuelve la ecuación:</p>
-          <h2 id="equationText">2x + 4 = 12</h2>
-          <p id="comboText" class="combo"></p>
-          <p id="feedbackText" class="feedback"></p>
-
-          <div id="answers" class="answers"></div>
-
-          <div class="tools">
-            <button id="hintBtn" class="btn secondary small">50/50</button>
-            <button id="skipBtn" class="btn secondary small">Saltar</button>
-            <button id="shieldBtn" class="btn secondary small">Escudo</button>
-            <button id="doubleBtn" class="btn secondary small">x2 puntos</button>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="pauseScreen" class="screen overlay-screen">
-      <div class="modal-card">
-        <h2>⏸ Juego en pausa</h2>
-        <p>Respira, piensa y vuelve cuando estés lista/o.</p>
-        <div class="button-row center">
-          <button id="resumeBtn" class="btn primary">Continuar</button>
-          <button id="pauseSoundBtn" class="btn secondary">🔊 Sonido ON</button>
-          <button id="quitBtn" class="btn danger">Salir</button>
+          <div class="folio">02</div>
         </div>
       </div>
-    </section>
 
-    <section id="endScreen" class="screen">
-      <div class="panel result-panel">
-        <span class="badge">Resultado final</span>
-        <h2 id="endTitle">¡Misión completada!</h2>
-        <div id="endAvatar" class="big-avatar">🏆</div>
-        <p id="endMessage"></p>
-
-        <div class="result-grid four">
-          <div><span>Puntaje</span><strong id="finalScore">0</strong></div>
-          <div><span>Correctas</span><strong id="correctCount">0</strong></div>
-          <div><span>Monedas</span><strong id="finalCoins">0</strong></div>
-          <div><span>Récord</span><strong id="bestScoreEnd">0</strong></div>
-        </div>
-
-        <div class="achievements-box">
-          <h3>Logros desbloqueados</h3>
-          <div id="achievementList" class="achievement-list"></div>
-        </div>
-
-        <div class="button-row center">
-          <button id="playAgainBtn" class="btn primary">Jugar otra vez</button>
-          <button id="homeBtn" class="btn secondary">Inicio</button>
+      <!-- ============ 3. INTRODUCCIÓN ============ -->
+      <div class="page">
+        <div class="pi paper">
+          <div class="running"><span>Introducción</span><span>Datos en Guardia</span></div>
+          <p class="eyebrow">Introducción</p>
+          <h2 class="article-title">La transformación digital <span class="hl">y sus riesgos</span></h2>
+          <figure class="photo light">
+            <img src="img/intro-laptop.jpg" alt="Ilustración de una laptop protegida por un escudo con candado">
+          </figure>
+          <div class="body dropcap">
+            <p>El crecimiento de la transformación digital ha permitido mejorar la comunicación, los negocios y los servicios; no obstante, también ha incrementado los riesgos relacionados con la protección de información personal.</p>
+            <p>En este contexto, la ciberseguridad se entiende como el conjunto de estrategias, tecnologías y procedimientos orientados a proteger redes, sistemas y datos frente a amenazas digitales (World Economic Forum, 2023).</p>
+            <p>Por ello, el presente texto analizará la importancia de la ciberseguridad, las principales amenazas informáticas, los factores que aumentan la vulnerabilidad y las estrategias necesarias para fortalecer la protección de datos.</p>
+          </div>
+          <div class="folio">03</div>
         </div>
       </div>
-    </section>
-  </main>
 
-  <script src="script.js"></script>
+      <!-- ============ 4. IMPORTANCIA ============ -->
+      <div class="page">
+        <div class="pi paper">
+          <div class="running"><span>Datos en Guardia</span><span>Importancia</span></div>
+          <p class="eyebrow">Importancia</p>
+          <h2 class="article-title">Por qué importa <span class="hl">proteger los datos</span></h2>
+          <figure class="photo">
+            <img src="img/proteccion-datos.jpg" alt="Ilustración de un monitor con escudo de protección de datos rodeado de llaves, nube y documentos">
+          </figure>
+          <div class="body">
+            <p>La importancia de la ciberseguridad se relaciona con la necesidad de proteger la información frente a accesos no autorizados, modificaciones indebidas o pérdida de datos. La ISO/IEC 27002:2022 establece controles que ayudan a fortalecer la seguridad de la información (World Economic Forum, 2023).</p>
+            <p>Asimismo, la protección de datos personales permite prevenir problemas como robo de identidad, uso inadecuado de información privada y vulneración de la privacidad de los usuarios.</p>
+          </div>
+          <div class="cia">
+            <div class="cia-item c1"><span class="cia-l">C</span><b>Confidencialidad</b><small>Solo accede quien está autorizado</small></div>
+            <div class="cia-item c2"><span class="cia-l">I</span><b>Integridad</b><small>Los datos no se alteran</small></div>
+            <div class="cia-item c3"><span class="cia-l">D</span><b>Disponibilidad</b><small>Accesibles cuando se necesitan</small></div>
+          </div>
+          <div class="folio">04</div>
+        </div>
+      </div>
+
+      <!-- ============ 5. AMENAZAS ============ -->
+      <div class="page">
+        <div class="pi paper">
+          <div class="running"><span>Amenazas</span><span>Datos en Guardia</span></div>
+          <p class="eyebrow red">Amenazas</p>
+          <h2 class="article-title">Las amenazas <span class="hl red">digitales</span></h2>
+          <div class="body">
+            <p>Las amenazas digitales constituyen uno de los principales desafíos actuales. El phishing utiliza técnicas de engaño para obtener credenciales, mientras que el ransomware bloquea información mediante métodos de cifrado. Asimismo, las filtraciones de datos exponen información personal y pueden ocasionar consecuencias económicas, legales y reputacionales para las organizaciones afectadas.</p>
+          </div>
+          <div class="threats">
+            <article class="threat">
+              <img src="img/phishing.jpg" alt="Persona encapuchada hablando por teléfono frente a una computadora">
+              <div class="threat-b">
+                <span class="tag">Engaño</span>
+                <h3>Phishing</h3>
+                <p>Mensajes que imitan a entidades de confianza para robar contraseñas.</p>
+              </div>
+            </article>
+            <article class="threat">
+              <img src="img/ransomware.jpg" alt="Atacante encapuchado con una laptop y una mano digital brillante">
+              <div class="threat-b">
+                <span class="tag">Cifrado</span>
+                <h3>Ransomware</h3>
+                <p>Bloquea los archivos y exige un pago para liberarlos.</p>
+              </div>
+            </article>
+            <article class="threat">
+              <img src="img/filtracion.jpg" alt="Silueta encapuchada sosteniendo un candado digital">
+              <div class="threat-b">
+                <span class="tag">Exposición</span>
+                <h3>Filtración</h3>
+                <p>Datos personales expuestos que llegan a terceros.</p>
+              </div>
+            </article>
+          </div>
+          <div class="folio">05</div>
+        </div>
+      </div>
+
+      <!-- ============ 6. FACTOR HUMANO ============ -->
+      <div class="page">
+        <div class="pi paper">
+          <div class="running"><span>Datos en Guardia</span><span>Vulnerabilidad</span></div>
+          <p class="eyebrow">Vulnerabilidad</p>
+          <h2 class="article-title">El factor <span class="hl">humano</span></h2>
+          <figure class="photo">
+            <img src="img/factor-humano.jpg" alt="Ilustración de una usuaria frente a una pantalla de inicio de sesión con contraseña">
+          </figure>
+          <div class="body">
+            <p>Los factores humanos representan un aspecto importante dentro de la ciberseguridad. El uso de contraseñas inseguras, la falta de capacitación y el desconocimiento sobre amenazas aumentan la vulnerabilidad de los sistemas. Por esta razón, la educación digital permite desarrollar mejores prácticas y reducir riesgos relacionados con la seguridad de la información (World Economic Forum, 2023).</p>
+          </div>
+          <div class="factors">
+            <div class="factor"><span class="fx">123456</span><p><b>Contraseñas inseguras</b>Cortas, repetidas o fáciles de adivinar</p></div>
+            <div class="factor"><span class="fx">0 h</span><p><b>Falta de capacitación</b>No se reconoce un ataque a tiempo</p></div>
+            <div class="factor"><span class="fx">?</span><p><b>Desconocimiento</b>De los riesgos y las malas prácticas</p></div>
+          </div>
+          <div class="folio">06</div>
+        </div>
+      </div>
+
+      <!-- ============ 7. ESTRATEGIAS ============ -->
+      <div class="page">
+        <div class="pi paper">
+          <div class="running"><span>Estrategias</span><span>Datos en Guardia</span></div>
+          <p class="eyebrow green">Estrategias</p>
+          <h2 class="article-title">Estrategias <span class="hl green">de protección</span></h2>
+          <figure class="photo tall">
+            <img src="img/estrategias.jpg" alt="Ilustración de un guardia con escudo junto a un celular con inicio de sesión seguro">
+          </figure>
+          <div class="body">
+            <p>Para reducir los riesgos digitales es necesario aplicar estrategias integrales que incluyan actualización constante de sistemas, autenticación segura, copias de respaldo, capacitación permanente y políticas institucionales. Estas medidas permiten mejorar la prevención y la respuesta frente a posibles ataques.</p>
+          </div>
+          <ul class="checklist">
+            <li><span class="ck"></span>Actualizar sistemas</li>
+            <li><span class="ck"></span>Autenticación segura</li>
+            <li><span class="ck"></span>Copias de respaldo</li>
+            <li><span class="ck"></span>Capacitación permanente</li>
+            <li><span class="ck"></span>Políticas institucionales</li>
+            <li><span class="ck"></span>Respuesta ante ataques</li>
+          </ul>
+          <div class="folio">07</div>
+        </div>
+      </div>
+
+      <!-- ============ 8. CIERRE ============ -->
+      <div class="page">
+        <div class="pi paper ink">
+          <img class="bg-img" src="img/cierre.jpg" alt="">
+          <div class="bg-shade"></div>
+          <div class="running"><span>Datos en Guardia</span><span>Conclusión</span></div>
+          <p class="eyebrow">Conclusión</p>
+          <h2 class="article-title">Hacia un entorno digital <span class="hl">confiable</span></h2>
+          <p class="big-quote">En conclusión, la ciberseguridad y la protección de datos personales son fundamentales dentro de la transformación digital <span class="cite">(ISO, 2022)</span>.</p>
+          <div class="body">
+            <p>El avance tecnológico debe estar acompañado de prevención, educación y medidas de seguridad adecuadas para construir un entorno digital confiable.</p>
+          </div>
+          <div class="trio">
+            <div>Prevención</div>
+            <div>Educación</div>
+            <div>Seguridad</div>
+          </div>
+          <div class="folio">08</div>
+        </div>
+      </div>
+
+      <!-- ============ 9. REFERENCIAS ============ -->
+      <div class="page">
+        <div class="pi paper">
+          <div class="running"><span>Referencias</span><span>Datos en Guardia</span></div>
+          <p class="eyebrow">Fuentes</p>
+          <h2 class="article-title">Referencias</h2>
+          <ul class="refs">
+            <li>Candau Romero, J. (2021). Ciberseguridad. Evolución y tendencias. <i>Boletín IEEE del Instituto Español de Estudios Estratégicos</i>, (23), 460–494.</li>
+            <li>International Organization for Standardization. (2022). <i>ISO/IEC 27001:2022 Information security, cybersecurity and privacy protection — Information security management systems — Requirements</i>.</li>
+            <li>International Organization for Standardization. (2022). <i>ISO/IEC 27002:2022 Information security, cybersecurity and privacy protection — Information security controls</i>.</li>
+            <li>National Institute of Standards and Technology. (2024). <i>Cybersecurity Framework (CSF) 2.0</i>. National Institute of Standards and Technology.</li>
+            <li>World Economic Forum. (2023). <i>Global Cybersecurity Outlook 2023</i>.</li>
+          </ul>
+          <figure class="photo band">
+            <img src="img/red-personas.jpg" alt="Personas conectadas por una red de líneas luminosas">
+          </figure>
+          <div class="folio">09</div>
+        </div>
+      </div>
+
+      <!-- ============ 10. VIDEO (antepenúltima) ============ -->
+      <div class="page">
+        <div class="pi paper video-page">
+          <div class="running"><span>Datos en Guardia</span><span>Presentación oral</span></div>
+          <p class="eyebrow red">Video</p>
+          <h2 class="article-title">Presentación <span class="hl red">oral</span></h2>
+          <p class="dek">Mira la exposición sin salir de la revista.</p>
+          <div class="video-frame no-flip" id="videoFrame">
+            <!-- El reproductor se genera desde script.js (YOUTUBE_URL) -->
+          </div>
+          <div class="video-meta">
+            <span>Expositor · Marco Antonio Choqque Huamani</span>
+            <a id="ytLink" class="yt-link no-flip" href="#" target="_blank" rel="noopener" hidden>Abrir en YouTube ↗</a>
+          </div>
+          <div class="guion">
+            <p class="guion-h"><span>Orden de la exposición</span><span>60–90 s</span></p>
+            <ol>
+              <li>Introducción</li><li>Importancia</li><li>Amenazas</li>
+              <li>Factor humano</li><li>Estrategias</li><li>Cierre</li>
+            </ol>
+          </div>
+          <div class="folio">10</div>
+        </div>
+      </div>
+
+      <!-- ============ 11. CRÉDITOS ============ -->
+      <div class="page">
+        <div class="pi paper">
+          <div class="running"><span>Créditos</span><span>Datos en Guardia</span></div>
+          <p class="eyebrow">Créditos</p>
+          <h2 class="article-title">Sobre esta <span class="hl">edición</span></h2>
+          <dl class="credits">
+            <div><dt>Redacción y exposición</dt><dd>Marco Antonio Choqque Huamani</dd></div>
+            <div><dt>NRC</dt><dd>37765</dd></div>
+            <div><dt>Tema</dt><dd>Ciberseguridad y protección de datos personales</dd></div>
+            <div><dt>ODS</dt><dd>ODS 16: Paz, justicia e instituciones sólidas</dd></div>
+            <div><dt>Trabajo</dt><dd>Evaluación final · Redacción de un texto y presentación oral</dd></div>
+          </dl>
+          <div class="ods-box big">
+            <div class="ods-num">16</div>
+            <p>Instituciones sólidas también son instituciones que cuidan la información de las personas.</p>
+          </div>
+          <div class="folio">11</div>
+        </div>
+      </div>
+
+      <!-- ============ 12. CONTRAPORTADA ============ -->
+      <div class="page page-cover" data-density="hard">
+        <div class="pi cover back">
+          <canvas class="cover-canvas" width="1000" height="1400" aria-hidden="true"></canvas>
+          <div class="back-center">
+            <div class="masthead small">DATOS <span>EN GUARDIA</span></div>
+            <p class="back-quote">“La seguridad de la información es una responsabilidad compartida.”</p>
+            <p class="small">Nº 01 · Ciberseguridad y protección de datos personales</p>
+            <img class="uc-logo back-logo" src="img/logo-uc-blanco.png" alt="Universidad Continental">
+          </div>
+          <div class="cover-foot">
+            <div><span class="small">Redacción</span><strong>Marco Antonio Choqque Huamani</strong></div>
+            <div class="right"><span class="small">NRC</span><strong>37765</strong></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<nav class="controls" aria-label="Navegación de la revista">
+  <button id="btnFirst" class="ctl" aria-label="Ir a la portada" title="Portada">⇤</button>
+  <button id="btnPrev" class="ctl" aria-label="Página anterior" title="Anterior">←</button>
+  <span id="pageInfo" class="page-info">1 / 12</span>
+  <button id="btnNext" class="ctl" aria-label="Página siguiente" title="Siguiente">→</button>
+  <button id="btnLast" class="ctl" aria-label="Ir a la contraportada" title="Contraportada">⇥</button>
+  <span class="sep"></span>
+  <button id="btnSound" class="ctl" aria-label="Sonido de página" aria-pressed="true" title="Sonido">♪</button>
+  <button id="btnFull" class="ctl" aria-label="Pantalla completa" title="Pantalla completa">⛶</button>
+</nav>
+
+<script src="lib/page-flip.browser.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

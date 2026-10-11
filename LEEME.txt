@@ -1,0 +1,17 @@
+REVISTA "DATOS EN GUARDIA" - Ciberseguridad y protección de datos personales
+
+1) Abre script.js y en la primera línea de configuración pega tu enlace:
+   const YOUTUBE_URL = "https://youtu.be/TU_VIDEO";
+   El reproductor aparece directamente en la página 10 (antepenúltima).
+
+2) Para que el video de YouTube se reproduzca, la revista debe estar publicada en internet
+   (abriendo el index.html con doble clic, YouTube puede bloquear el video).
+   Opción rápida y gratis: https://app.netlify.com/drop -> arrastra la carpeta "revista".
+   También sirve GitHub Pages. El enlace que te den es tu "enlace del libro animado".
+
+3) El video debe estar en YouTube como Público u Oculto (no Privado).
+
+Archivos: index.html (contenido), styles.css (diseño), script.js (animación y video),
+lib/page-flip.browser.js (librería de pasar páginas, licencia MIT),
+img/ (imágenes) y fonts/ (tipografías Montserrat y Nunito Sans, incluidas para que se vean igual en cualquier PC).
+Atajo: agrega #video al final del enlace para abrir directo en la página del video.
